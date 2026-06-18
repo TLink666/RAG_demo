@@ -1,10 +1,11 @@
 import requests
 from src.rag.prompt import build_prompt
+from src.config import *
 
 def ask_llm(context, question):
     prompt = build_prompt(context, question)
     res = requests.post(
-        "http://localhost:11434/api/generate",
+        f"{OLLAMA_URL}/api/generate",
         json={
             "model": "qwen2.5:7b",
             "prompt": prompt,
