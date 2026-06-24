@@ -1,6 +1,6 @@
 # ========= Path =========
 
-HF_CACHE = r"G:\huggingface_cache"
+HF_CACHE = r"G:/huggingface_cache"
 
 DATA_DIR = "../data"
 
@@ -60,3 +60,12 @@ def print_config():
         f"Hybrid:"
         f" {HYBRID_ALPHA}"
     )
+    
+def export_config():
+    return {
+        "chunk_size":CHUNK_SIZE,
+        "overlap":OVERLAP,
+        "method":CHUNK_METHOD,
+        "top_k":TOP_K,
+        "alpha":HYBRID_ALPHA
+    }
