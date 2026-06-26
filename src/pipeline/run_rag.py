@@ -56,4 +56,4 @@ def run_rag(queries):
         save_dir=save_dir
     )
 
-    return docs, results, metrics, chunk_stats, retrieval_stats
+    return results, metrics, docs,  chunk_stats, retrieval_stats

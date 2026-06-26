@@ -1,14 +1,18 @@
+from pathlib import Path
+
 # ========= Path =========
+
+ROOT_DIR = (Path(__file__).parent.parent)
 
 HF_CACHE = r"G:/huggingface_cache"
 
-DATA_DIR = "../data"
+DATA_DIR = ROOT_DIR/"data"
 
-STORAGE_DIR = "../storage"
+STORAGE_DIR = ROOT_DIR/"storage"
 
-RESULT_DIR = "../results"
+RESULT_DIR = ROOT_DIR/"results"
 
-EVA_DATA_DIR = DATA_DIR + "/evaluation"
+EVA_DATA_DIR = DATA_DIR/"evaluation"
 
 # ========= Models =========
 
