@@ -36,6 +36,14 @@ TOP_K = 5
 
 HYBRID_ALPHA = 0.7
 
+RETRIEVAL_METHOD = "rrf"
+
+RRF_K = 5
+
+ENABLE_GUARD=True
+
+RETRIEVAL_THRESHOLD=0.25
+
 # ========= Experiment =========
 
 DEBUG = False

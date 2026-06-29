@@ -36,8 +36,8 @@ def run_rag(queries):
     metrics = {
         "retrieval_hit":hit_score,
 
-        "avg_retrieval_score":
-            retrieval_stats["avg_score"],
+        "avg_retrieval_confidence":
+            retrieval_stats["avg_confidence"],
         "num_chunks":
             chunk_stats["num_chunks"]
     }

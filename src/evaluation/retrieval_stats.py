@@ -2,30 +2,30 @@ from collections import Counter
 import numpy as np
 
 def analyze_retrieval(results):
-    all_scores = []
+    all_conf = []
     sources = []
     chunks = []
     for r in results:
         retrieved = r["retrieved"]
         for x in retrieved:
-            all_scores.append(x["score"])
+            all_conf.append(x["confidence"])
             sources.append(x["source"])
             chunks.append(x["chunk_id"])
     return {
         "num_queries": len(results),
-        "avg_score":
+        "avg_confidence":
         round(
-            np.mean(all_scores),
+            np.mean(all_conf),
             3
         ),
-        "min_score":
+        "min_confidence":
         round(
-            min(all_scores),
+            min(all_conf),
             3
         ),
-        "max_score":
+        "max_confidence":
         round(
-            max(all_scores),
+            max(all_conf),
             3
         ),
         "unique_sources":
@@ -45,16 +45,16 @@ def print_retrieval(stats):
         f"{stats['num_queries']}"
     )
     print(
-        f"Avg score: "
-        f"{stats['avg_score']}"
+        f"Avg confidence: "
+        f"{stats['avg_confidence']}"
     )
     print(
-        f"Min score: "
-        f"{stats['min_score']}"
+        f"Min confidence: "
+        f"{stats['min_confidence']}"
     )
     print(
-        f"Max score: "
-        f"{stats['max_score']}"
+        f"Max confidence: "
+        f"{stats['max_confidence']}"
     )
     print(
         f"Unique sources: "
