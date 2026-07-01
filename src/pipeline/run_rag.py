@@ -1,11 +1,10 @@
-from datetime import datetime
 from src.pipeline.prepare_pipeline import prepare_pipeline
 from src.pipeline.batch_query import batch_query
-from src.evaluation.chunk_stats import *
-from src.evaluation.retrieval_stats import *
-from src.evaluation.rag_metrics import *
-from src.evaluation.gold_loader import *
-from src.evaluation.experiment import *
+from src.evaluation.chunk_stats import analyze_chunks
+from src.evaluation.retrieval_debug import retrieval_debug_stats
+from src.evaluation.gold_loader import load_gold
+from src.evaluation.compute_metrics import compute_metrics
+from src.experiment.run_experiment import run_experiment
 from src.config import *
 
 def run_rag(queries):
@@ -20,40 +19,21 @@ def run_rag(queries):
             docs
         )
 
-    chunk_stats = analyze_chunks(docs)
-
-    retrieval_stats = analyze_retrieval(results)
-
     gold = load_gold(
         f"{EVA_DATA_DIR}/retrieval_gold.json"
     )
 
-    hit_score = retrieval_hit(
-        results,
-        gold
-    )
+    chunk_stats = analyze_chunks(docs)
 
-    metrics = {
-        "retrieval_hit":hit_score,
+    debug_stats = retrieval_debug_stats(results)
 
-        "avg_retrieval_confidence":
-            retrieval_stats["avg_confidence"],
-        "num_chunks":
-            chunk_stats["num_chunks"]
-    }
-
-    time = datetime.now()
-
-    save_dir = (
-        f"{RESULT_DIR}/"
-        f"{time:%Y%m%d_%H%M%S}"
-    )
-
-    save_experiment(
+    metrics = compute_metrics(results, gold, chunk_stats)
+    
+    run_experiment(
         config=export_config(),
         results=results,
         metrics=metrics,
-        save_dir=save_dir
+        debug_stats=debug_stats
     )
 
-    return results, metrics, docs,  chunk_stats, retrieval_stats
+    return results, metrics, docs, chunk_stats, debug_stats

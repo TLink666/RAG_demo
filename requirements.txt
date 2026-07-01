@@ -4,3 +4,4 @@ numpy
 jupyter
 pypdf
 rank-bm25
+python-docx

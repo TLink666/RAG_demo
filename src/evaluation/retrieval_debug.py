@@ -1,7 +1,7 @@
 from collections import Counter
 import numpy as np
 
-def analyze_retrieval(results):
+def retrieval_debug_stats(results):
     all_conf = []
     sources = []
     chunks = []
@@ -14,28 +14,15 @@ def analyze_retrieval(results):
     return {
         "num_queries": len(results),
         "avg_confidence":
-        round(
-            np.mean(all_conf),
-            3
-        ),
+            round(np.mean(all_conf),3),
         "min_confidence":
-        round(
-            min(all_conf),
-            3
-        ),
+            round(min(all_conf),3),
         "max_confidence":
-        round(
-            max(all_conf),
-            3
-        ),
+            round(max(all_conf),3),
         "unique_sources":
-        len(
-            set(sources)
-        ),
+            len(set(sources)),
         "top_chunks":
-        Counter(
-            chunks
-        ).most_common(5)
+            Counter(chunks).most_common(5)
     }
 
 def print_retrieval(stats):

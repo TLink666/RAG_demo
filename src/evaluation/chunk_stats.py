@@ -19,11 +19,11 @@ def analyze_chunks(docs):
     return {
         "num_chunks": len(docs),
         "avg_length":
-        round(np.mean(lengths), 1),
+            float(round(np.mean(lengths), 1)),
         "min_length": min(lengths),
         "max_length": max(lengths),
         "std":
-        round(np.std(lengths),1),
+            float(round(np.std(lengths),1)),
         "tiny_chunks": len(tiny),
         "source_stats": dict(sources)
     }

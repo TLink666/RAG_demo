@@ -1,6 +1,6 @@
 import os
 
-def load_txt(path):
+def load_md(path):
     with open(path, "r", encoding="utf-8") as f:
         return [
             {
@@ -9,5 +9,4 @@ def load_txt(path):
                 "page": None,
                 "text": f.read()
             }
-
         ]
